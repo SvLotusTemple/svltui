@@ -1,0 +1,48 @@
+<br />
+<br />
+<div class="col-md-6 d-flex h-100 align-items-center justify-content-center">
+  <h3>Login</h3>
+</div>
+<div class="col-md-6 d-flex h-100 align-items-center justify-content-center">
+      <form (ngSubmit)="onLogin()" novalidate>
+        <table class="table">
+        <tbody>
+          <tr>
+            <td colspan="2"> <h2 *ngIf="this.errorMsg != null">{{ errorMsg }}</h2></td>
+          </tr>
+        <tr>
+          <td align="right"><label for="username">User Id:&nbsp;</label></td>
+          <td>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="enter user id"
+            [(ngModel)]="loginRequest.username"
+            name="username"
+            required
+          />
+        </td>
+        </tr>
+        <tr>
+        <td align="right"><label for="password">Password:&nbsp;</label></td>
+        <td>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="enter password"
+            [(ngModel)]="loginRequest.password"
+            name="password"
+            required
+          />
+        </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td ><button type="submit" class="btn btn-success">Submit</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

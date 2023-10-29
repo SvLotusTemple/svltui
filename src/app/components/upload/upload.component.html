@@ -1,0 +1,82 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td colspan="11"><h4>File Manager</h4></td>
+        <td >
+          <button class="btn btn-link" (click)="clear();modalm.show()">Add file</button>
+        </td>
+      </tr>    
+      <tr>
+        <th colspan="4"><label class="text-danger">Name</label></th>
+        <th colspan="2"><label class="text-danger">Date</label></th>
+        <th colspan="2"><label class="text-danger">Created By</label></th>
+        <th colspan="2"><label class="text-danger">Status</label></th>
+        <th colspan="2"><label class="text-danger">Comments</label></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let rec of files">
+      <td class="col-md-1 col-lg-1 text-danger" align="center">
+        <div *ngIf="this.role == 'ADMIN' && moduleId==6; else deleteFile">
+          <input type="checkbox" name="showid" value="{{rec.id}}" (click)="setArchive(rec.id!)" />
+        </div>
+        <ng-template #deleteFile>
+          <a (click)="delete(rec.hashCd!)">
+            <i class="fa fa-trash" style="color:rgb(92, 29, 29)" aria-hidden="true"></i>
+          </a>
+        </ng-template>   
+        
+      </td>
+      <td colspan="3" align="left">
+        <label class="colorfy">
+          <a href="{{rec.awsS3FileUrl}}">{{rec.fileName}}</a>
+        </label>
+      </td>
+      <td colspan="2"><label class="colorfy">{{convertDate(rec.createdDate!)}}</label></td>
+      <td colspan="2"><label class="colorfy">{{rec.userName}}</label></td>
+      <td colspan="2"><label class="colorfy">{{setStatus(rec.status!)}}</label></td>
+      <td colspan="3"><label class="colorfy">{{rec.message}}</label></td>
+    </tbody>
+  </table>
+</div>
+<!-- The Modal -->
+<app-modalm #modalm>
+  <!-- Modal Header -->
+  <div class="app-modal-header">
+    <h3>File upload</h3>
+    <h4 *ngIf="this.errorMsg">
+      <div class="alert-warning">{{errorMsg}}</div>
+    </h4>
+  </div>
+  <!-- Modal body -->
+  <div class="app-modal-body">
+    <div class="form-group">
+      <div>
+        <table class="table table-light table-striped table-hover table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%" class="text-body" scope="row">File: </td>
+              <td width="70%">
+                <input type="file" (change)="addFile($event)" #fileUpload>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-dark">Message: </td>
+              <td>&nbsp;<input type="text" [(ngModel)]="message">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal footer -->
+  <div class="app-modal-footer">
+    <button class="btn btn-danger" (click)="modalm.hide()">Close</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-success" (click)="onSave(modalm)">Submit</button>
+  </div>
+
+</app-modalm>

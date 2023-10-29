@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td colspan="11"><h4>Users</h4></td>
+        <td><a class="btn btn-link" [routerLink]="['/user/edit', 0]">Add User</a></td>
+      </tr>
+      <tr>
+        <th colspan="3"><label class="text-danger">Name</label></th>
+        <th colspan="2"><label class="text-danger">Email Address</label></th>
+        <th colspan="2"><label class="text-danger">Phone Number</label></th>
+        <th colspan="2"><label class="text-danger">Status</label></th>
+        <th colspan="3"><label class="text-danger">Roles</label></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let rec of users">
+      <td colspan="3">
+        <label class="colorfy">
+          <a [routerLink]="['/user/edit', rec.userId]">{{rec.lastName}},&nbsp;{{rec.firstName}}</a></label>
+      </td>
+      <td colspan="2"><label class="colorfy">{{rec.emailAddress}}</label></td>
+      <td colspan="2"><label class="colorfy">{{rec.phone}}</label></td>
+      <td colspan="2"><label class="colorfy">{{convertStatus(rec.status!)}}</label></td>
+      <td colspan="3"><label class="colorfy">{{convertRole(rec.roles!)}}</label></td>
+    </tbody>
+  </table>
+</div>

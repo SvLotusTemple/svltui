@@ -1,0 +1,13 @@
+<br />
+<br />
+
+<div class="row">
+  <div class="container container-table">
+    <div class="col-md-4">
+      <h3>Select Module</h3><br>
+      <div *ngFor="let rec of modules">
+        <button type="button" class="btn btn-link" (click)="onSelect(rec)">{{rec}}</button>
+      </div>
+    </div>
+  </div>
+</div>

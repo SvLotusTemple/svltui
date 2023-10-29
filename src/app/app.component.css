@@ -1,0 +1,28 @@
+.logo {
+	width: 30%;
+	height: 50px;
+	background: url(./../logo2.png) no-repeat;
+	background-position: 3%;
+}
+.headerArea {
+	width: 100%;
+	margin-bottom: 0px;
+	border: 1px solid #964444;
+	box-shadow: 5px 5px 30px #ccc;
+	border-radius: 8px 8px 0 0;
+	display: block;
+	background: #DD9303;	
+	background: -moz-linear-gradient(top, #FFAB00 0%, #dd9303 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFAB00), color-stop(100%,#dd9303));
+	background: -webkit-linear-gradient(top, #FFAB00 0%,#dd9303 100%);
+	background: -o-linear-gradient(top, #FFAB00 0%,#dd9303 100%);
+	background: -ms-linear-gradient(top, #FFAB00 0%,#dd9303 100%);
+	filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#FFAB00', endColorstr='#dd9303')";	
+	border-bottom: none;
+}
+.title {
+	padding: 10px 0px 0px 150px;
+	font-size:20px;
+	color: #911A0D;
+	text-shadow: 2px 0px 1px #FFDD00;
+}

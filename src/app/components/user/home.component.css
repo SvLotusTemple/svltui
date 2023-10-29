@@ -1,0 +1,19 @@
+.container {
+    width:600px;
+    margin:0 auto;
+}
+
+.row {
+    line-height:24pt;
+    border: solid 1px black;
+}
+
+.row:nth-child(odd) {
+    background: #e0e0e0;
+}
+
+h3 {
+    line-height:36pt;
+    font-weight:bold;
+    color:burlywood;
+}

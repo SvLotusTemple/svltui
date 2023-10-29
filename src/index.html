@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SVLotus Temple</title>
+  <base href="/">
+  <script>
+    function getClaimsFromToken(jwtToken) {
+           return JSON.parse(atob(jwtToken.split('.')[1]));
+    }
+ </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

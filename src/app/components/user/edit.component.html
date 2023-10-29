@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<div class="row">
+    <div class="col-md-4">
+        <h4>User</h4>
+        <form (ngSubmit)="onSave()" novalidate>
+            <table class="table">
+                <tbody>
+                  <tr>
+                    <td colspan="2"> <h4 class="text-danger" *ngIf="this.errorMsg != null">{{ errorMsg }}</h4></td>
+                  </tr>
+                <tr>
+                    <td align="right"><label for="lastName">Last Name:&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" class="form-control" id="lastName" [(ngModel)]="this.user.lastName" placeholder="enter last name"
+                name="lastName" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"><label for="firstName">First Name:&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" class="form-control" id="firstName" [(ngModel)]="this.user.firstName" placeholder="enter first name"
+                name="firstName" required>
+                    </td>
+                </tr>                                
+                <tr>
+                    <td align="right"><label for="emailAddress">Email:&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="35" class="form-control" id="emailAddress" [(ngModel)]="this.user.emailAddress" placeholder="enter email"
+                name="emailAddress" required>
+                    </td>
+                </tr>                                
+                <tr>
+                    <td align="right"><label for="phone">Phone Number:&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" class="form-control" id="phone" [(ngModel)]="this.user.phone" placeholder="enter phone number"
+                name="phone" required>
+                    </td>
+                </tr>                                
+                <tr>
+                    <td align="right"><label for="status">Status:&nbsp;</label></td>
+                    <td>
+                        <label>
+                            <input class="form-check-input" type="radio" name="status" (click)="setStatusButton('A')"
+                                [checked]="user.status == 'A'"> Active
+                        </label>
+                        <label>
+                            <input class="form-check-input" type="radio" name="status" (click)="setStatusButton('I')"
+                                [checked]="user.status == 'I'"> Inactive
+                        </label>
+                    </td>
+                </tr>                                
+                <tr>
+                    <td>&nbsp;</td>
+                    <td ><button type="submit" class="btn btn-success">Submit</button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </form>
+    </div>
+</div>

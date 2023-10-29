@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+          <td colspan="11"><h4>Priest Request</h4>&nbsp;</td>
+          <td >
+            <div *ngIf="this.role == 'ADMIN'; else addRequest">
+              <a class="btn btn-link" [routerLink]="['/priest/edit', 0]">Add Request</a>
+            </div>
+            <ng-template #addRequest> &nbsp;&nbsp; </ng-template>   
+          </td>  
+      </tr>
+      <tr>
+        <th ><label class="text-danger">ID</label></th>
+        <th ><label class="text-danger">Date/Time</label></th>
+        <th ><label class="text-danger">Name</label></th>
+        <th colspan="2"><label class="text-danger">Address</label></th>
+        <th ><label class="text-danger">Email/Phone</label></th>
+        <th colspan="2"><label class="text-danger">Service</label></th>
+        <th ><label class="text-danger">Venue</label></th>
+        <th ><label class="text-danger">Amount</label></th>
+        <th ><label class="text-danger">Priest</label></th>
+        <th ><label class="text-danger">Updated By</label></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let rec of summaryReport">
+      <td >
+        <div *ngIf="this.role == 'ADMIN'; else roleTemplate">
+          <label class="colorfy">
+            <a [routerLink]="['/priest/edit', rec.requestId]">{{rec.requestId}}</a>
+          </label>
+        </div>
+        <ng-template #roleTemplate>
+           <label class="colorfy">{{rec.requestId}}</label>
+         </ng-template>
+      </td>
+      <td ><label class="colorfy">{{rec.pujaDate}}&nbsp;:&nbsp;{{rec.startTime}}</label></td>
+      <td colspan="2">
+        <label class="colorfy">{{rec.lastName}}&nbsp;-&nbsp;{{rec.firstName}}</label>
+      </td>
+      <td ><label class="colorfy">{{getAddress(rec.address!, rec.city!,rec.state!, rec.zipCode!)}}</label></td>
+      <td ><label class="colorfy">{{getEmailPhone(rec.phone!, rec.email!)}}</label></td>
+      <td colspan="2"><label class="colorfy">{{getService(rec.priestDetails!)}}</label></td>
+      <td ><label class="colorfy">{{rec.templeEvent}}</label></td>
+      <td ><label class="colorfy">{{rec.amount!}}&nbsp;:&nbsp;{{rec.paid!}}</label></td>
+      <td ><label class="colorfy">{{rec.priestName}}</label></td>
+      <td ><label class="colorfy">{{rec.updateBy}}</label></td>
+    </tbody>
+  </table>
+</div>

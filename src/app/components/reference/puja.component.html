@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td colspan="6"><h4>Reference</h4></td>
+        <td ><a class="btn btn-link" [routerLink]="['/reference/puja/edit', 0]">Add Puja</a></td>
+      </tr>
+      <tr>
+        <th ><label class="text-danger">Name</label></th>
+        <th colspan="2"><label class="text-danger">Details</label></th>
+        <th ><label class="text-danger">Temple</label></th>
+        <th ><label class="text-danger">Outside</label></th>
+        <th ><label class="text-danger">Hours</label></th>
+        <th ><label class="text-danger">Status</label></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let rec of pujas">
+
+      <td ><label class="colorfy"><a [routerLink]="['/reference/puja/edit', rec.id]">{{rec.pujaName}}</a></label></td>
+      <td colspan="2"><label class="colorfy">{{rec.pujaDetails}}</label></td>
+      <td ><label class="colorfy">{{rec.amount}}</label></td>
+      <td ><label class="colorfy">{{rec.outsideAmount}}</label></td>
+      <td ><label class="colorfy">{{rec.pujaHours}}</label></td>
+      <td ><label class="colorfy">{{setStatus(rec.status!)}}</label></td>
+    </tbody>
+  </table>
+</div>

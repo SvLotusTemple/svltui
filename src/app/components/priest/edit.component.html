@@ -1,0 +1,183 @@
+<app-navbar></app-navbar>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Priest Request</h4>
+        <form (ngSubmit)="onSave()">
+            <table class="table table-bordered" cellspacing="5" cellpadding="5" width="60%" align="center">
+                <tbody>
+                  <tr scope="row">
+                    <td colspan="12"> <h4 class="text-danger" *ngIf="errorMsg != null">{{ errorMsg }}</h4></td>
+                  </tr>
+                <tr>
+                    <td align="right"><label for="pujaDate" class="col-form-label">Date & Time:</label><font color=red>*</font></td>
+                    <td >
+                        <input type="date" maxlength="10" size="10" class="form-control" id="pujaDate" [(ngModel)]="pujaDate"  name="pujaDate"><font color=red>*</font>
+                    
+                        <select class="custom-select" #myTime (change)="setTime(myTime.value)">
+                           <option value="">Choose pickup time</option>
+                           <option *ngFor="let time of times" [value]="time.id" [selected]="myTime.value == startTime">{{time.name}}</option>
+                        </select>
+                        
+                    </td>
+                    <td align="right"><label for="venue" class="col-form-label">Venue:<font color=red>*</font>&nbsp;</label></td>
+                    <td >
+                        <label>
+                            <input class="form-check-input" type="radio" name="venue" (click)="setTempleEvent('Y')"
+                                [checked]="templeEvent == 'Y'"> Yes&nbsp;&nbsp;
+                        </label>
+                        <label>
+                            <input class="form-check-input" type="radio" name="venue" (click)="setTempleEvent('N')"
+                                [checked]="templeEvent == 'N'"> No
+                        </label>
+                    </td>
+                </tr>                                
+                <tr>
+                    <td align="right"><label for="lastName" class="col-form-label">Last Name:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="15" class="form-control" id="lastName" [(ngModel)]="lastName" placeholder="enter last name"
+                name="lastName">
+                    </td>
+                    <td align="right"><label for="firstName" class="col-form-label">First Name:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="15" class="form-control" id="firstName" [(ngModel)]="firstName" placeholder="enter first name"
+                name="firstName">
+                    </td>
+                </tr>  
+                <tr>
+                    <td align="right"><label for="emailAddress" class="col-form-label">Email:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="15" class="form-control" id="emailAddress" [(ngModel)]="email" placeholder="enter email"
+                name="emailAddress">
+                    </td>
+                    <td align="right"><label for="phone" class="col-form-label">Phone Number:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="15" class="form-control" id="phone" [(ngModel)]="phone" placeholder="enter phone number"
+                name="phone">
+                    </td>
+                </tr>                                
+                <tr>
+                    <td align="right"><label for="street" class="col-form-label">Street Name:<font color=red>*</font>&nbsp;</label></td>
+                    <td colspan="3">
+                        <input type="text"  maxlength="50" size="50" class="form-control" id="street" [(ngModel)]="address" placeholder="enter street address"
+                name="street">
+                    </td>
+                </tr>  
+                <tr>
+                    <td align="right"><label for="city" class="col-form-label">City:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="20" class="form-control" id="city" [(ngModel)]="city" placeholder="enter city"
+                name="city">
+                    </td>
+                    <td align="right"><label for="state" class="col-form-label">State:<font color=red>*</font>&nbsp;</label></td>
+                    <td noWrap>
+                        <select class="custom-select" #myState (change)="setState(myState.value)">
+                            <option value="">Choose pickup state</option>
+                            <option *ngFor="let state of states" [value]="state.code" [selected]="myState.value == state">{{state.name}}</option>
+                        </select>
+                        <label for="zipCode" class="col-form-label">&nbsp;&nbsp;Zip:</label>
+                        <input type="text" maxlength="5" size="5"class="form-control" id="zipCode" [(ngModel)]="zipCode" placeholder="enter zip" name="zip">                       
+                    </td>
+                </tr>                                                    
+                <tr>
+                    <td align="right"><label for="puja" class="col-form-label">Services:&nbsp;<font color=red>*</font>&nbsp;</label>
+                    </td>
+                    <td>
+                        <select class="custom-select" #mypuja (change)=onSelectedPuja(mypuja.value)>
+                            <option value="">Choose pickup puja</option>
+                            <option *ngFor="let puja of pujas" [value]="puja.id" >{{puja.pujaName}}</option>
+                        </select>  &nbsp;&nbsp;                  
+                    </td>
+                    <td colspan="2">
+                        <table border="1">
+                            <thead>
+                                <th>&nbsp;&nbsp;Puja Name</th>
+                                <th>&nbsp;&nbsp;Hours</th>
+                                <th colspan="2">&nbsp;&nbsp;Amount</th>
+                            </thead>
+                            <tbody  *ngFor="let rec of pujaDtl">
+                            <tr>
+                                <td *ngIf="rec.hours != null">
+                                    &nbsp;&nbsp;{{rec.pujaName}}
+                                </td>
+                                <td *ngIf="rec.hours != null">&nbsp;&nbsp;{{rec.hours}}</td>
+                                <td *ngIf="rec.amount != null">&nbsp;&nbsp;{{rec.amount}}</td>
+                                <td *ngIf="rec.amount != null">&nbsp;&nbsp;
+                                <a href="onDeletePuja({{rec.pujaId}})" class="btn btn-info btn-sm">
+                                    <span class="glyphicon glyphicon-minus">-</span>
+                                </a></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </td>
+                </tr> 
+                <tr>
+                    <td align="right"><label for="message" class="col-form-label">Comments:&nbsp;</label></td>
+                    <td colspan="3">
+                        <textarea rows="5" class="form-control" id="message" [(ngModel)]="message" placeholder="enter message"
+                name="message"></textarea>
+                    </td>
+                </tr>    
+                <tr *ngIf="role != null">
+                    <td align="right"><label for="priest" class="col-form-label">Priest:&nbsp;</label></td>
+                    <td>
+                        <select class="custom-select" #mypriest (change)="setPriest(mypriest.value)">&nbsp;
+                            <option value="">Choose pickup priest</option>
+                            <option *ngFor="let priest of priests" [value]="priest.id" [selected]="mypriest.value == getPriest()">{{priest.name}}</option>
+                            </select>&nbsp;
+                    </td>
+                    <td align="right"><label for="amount" class="col-form-label">Amount:&nbsp;</label></td>
+                    <td>{{amount}}
+                    </td>
+                </tr>         
+                <tr><td colspan="4"></td></tr>   
+                <tr><td colspan="4"></td></tr>        
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="3" align="center">
+                        <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button *ngIf="role != null" type="submit" class="btn btn-warning" (click)="onModal(1);modalm.show()">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button *ngIf="role != null" type="button" class="btn btn-info" (click)="onModal(2);modalm.show()"> Send Email</button>
+                    </td>
+                  </tr>                               
+                </tbody>
+              </table>
+        </form>
+    </div>
+</div>
+<!-- The Modal -->
+<app-modalm #modalm>
+    <!-- Modal Header -->
+    <div class="app-modal-header">
+        <label class="fs-2 fw-bold">{{modalTitle}}</label>
+      <h4 *ngIf="this.errorMsg">
+        <div class="alert-warning">{{errorMsg}}</div>
+      </h4>
+    </div>
+    <!-- Modal body -->
+    <div class="app-modal-body">
+      <div class="form-group">
+        <div>
+          <table class="table table-light table-striped table-hover table-bordered">
+            <tbody>
+                <tr>
+                    <td><label  class="col-form-label">Message:&nbsp;</label></td>
+                </tr>
+              <tr>
+                <td>&nbsp;<textarea rows="5" class="form-control" [(ngModel)]="modalMessage"></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal footer -->
+    <div class="app-modal-footer">
+      <button class="btn btn-success" (click)="onModalSubmit(modalm)">Submit</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-danger" (click)="modalm.hide()">Close</button>
+    </div>
+  
+  </app-modalm>
+  

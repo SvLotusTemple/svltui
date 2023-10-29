@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+.modal-dialog {
+    overflow-y: initial !important;
+  }
+  .modal-body{
+    max-height: 410px;
+    overflow-y: auto;
+  }
+  .modal-body-outer {
+    overflow-y: scroll;
+    height: 565px;
+    padding: 0px;
+    overflow-x: hidden;
+  }
+  .modal-svlt {
+    width: 80px;
+    margin: 120px auto;
+    text-shadow: none !important;
+  }
+  .modal-content {
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    border-radius: 5px !important;
+    box-shadow: 5px 10px #888;
+    border: 1px solid #000;
+  }
+  .modalButton {
+    visibility: visible;
+  }

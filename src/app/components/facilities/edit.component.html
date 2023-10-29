@@ -1,0 +1,183 @@
+<app-navbar></app-navbar>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Facilities Request</h4>
+        <form (ngSubmit)="onSave()">
+            <table class="table table-bordered" cellspacing="5" cellpadding="5" width="60%" align="center">
+                <tbody>
+                  <tr scope="row">
+                    <td colspan="12"> <h4 class="text-danger" *ngIf="errorMsg != null">{{ errorMsg }}</h4></td>
+                  </tr>
+                  <tr>
+                    <td align="right"><label for="lastName" class="col-form-label">Last Name:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="15" class="form-control" id="lastName" [(ngModel)]="lastName" placeholder="enter last name"
+                name="lastName">
+                    </td>
+                    <td align="right"><label for="firstName" class="col-form-label">First Name:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="15" class="form-control" id="firstName" [(ngModel)]="firstName" placeholder="enter first name"
+                name="firstName">
+                    </td>
+                </tr>  
+                <tr>
+                    <td align="right"><label for="emailAddress" class="col-form-label">Email:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="15" class="form-control" id="emailAddress" [(ngModel)]="email" placeholder="enter email"
+                name="emailAddress">
+                    </td>
+                    <td align="right"><label for="phone" class="col-form-label">Phone Number:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="15" class="form-control" id="phone" [(ngModel)]="phone" placeholder="enter phone number"
+                name="phone">
+                    </td>
+                </tr>                                
+                <tr>
+                    <td align="right"><label for="street" class="col-form-label">Street Name:<font color=red>*</font>&nbsp;</label></td>
+                    <td colspan="3">
+                        <input type="text"  maxlength="50" size="50" class="form-control" id="street" [(ngModel)]="address" placeholder="enter street address"
+                name="street">
+                    </td>
+                </tr>  
+                <tr>
+                    <td align="right"><label for="city" class="col-form-label">City:<font color=red>*</font>&nbsp;</label></td>
+                    <td>
+                        <input type="text" maxlength="25" size="20" class="form-control" id="city" [(ngModel)]="city" placeholder="enter city"
+                name="city">
+                    </td>
+                    <td align="right"><label for="state" class="col-form-label">State:<font color=red>*</font>&nbsp;</label></td>
+                    <td noWrap>
+                        <select class="custom-select" #st (change)="setState(st.value)">
+                            <option value="">Choose pickup state</option>
+                            <option *ngFor="let st of states" [value]="st.code" [selected]="st.code == state">{{st.name}}</option>
+                        </select>
+                        &nbsp;&nbsp;Zip:
+                        <input type="text" maxlength="5" size="5"class="form-control" id="zipCode" [(ngModel)]="zipCode" placeholder="enter zip" name="zip">                       
+                    </td>
+                </tr>  
+                <tr>
+                        <td align="right"><label for="eventDate" class="col-form-label">Date:</label><font color=red>*</font></td>
+                        <td >
+                            <input type="date" maxlength="10" size="10" class="form-control" id="eventDate" [(ngModel)]="eventDate"  name="eventDate">
+                        </td>
+                        <td align="right"><label for="eventDate" class="col-form-label">Time:</label><font color=red>*</font></td>
+                        <td >                      
+                            <select class="custom-select" #time (change)="setTime(time.value)">
+                               <option value="">Choose pickup time</option>
+                               <option *ngFor="let time of times" [value]="time.code" [selected]="time.code == startTime">{{time.name}}</option>
+                            </select>
+                        </td>
+                </tr>                                                  
+                <tr>
+                    <td align="right"><label for="numPeople" class="col-form-label">Number of People:</label><font color=red>*</font></td>
+                    <td >
+                        <input type="text" maxlength="5" size="5" class="form-control" id="numPeople" [(ngModel)]="numPeople"  name="numPeople">
+                    </td>
+                    <td align="right"><label for="duration" class="col-form-label">Duration:<font color=red>*</font>&nbsp;</label></td>
+                    <td >
+                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration">
+                    </td>
+                </tr>     
+                <tr>
+                    <td align="right"><label for="eventName" class="col-form-label">Event Details:</label><font color=red>*</font></td>
+                    <td colspan="3">
+                        <textarea rows="5" class="form-control" id="eventName" [(ngModel)]="eventName" placeholder="enter message"
+                name="message"></textarea>
+                    </td>
+                </tr>   
+                <tr>
+                    <td align="right"><label for="eventType" class="col-form-label">Event Type:</label><font color=red>*</font></td>
+                    <td colspan="3">
+                        <label>
+                            <input class="form-check-input" type="radio" name="eventType" (click)="setType('F')"
+                                [checked]="eventType == 'F'"> Family&nbsp;&nbsp;
+                        </label>
+                        <label>
+                            <input class="form-check-input" type="radio" name="eventType" (click)="setType('O')"
+                                [checked]="eventType == 'O'"> Organization
+                        </label>
+                    </td>
+                </tr>  
+                <tr>
+                    <td align="right"><label for="eventType" class="col-form-label">Facilities Requested:</label><font color=red>*</font></td>
+                    <td colspan="3">
+                        <label>
+                            <input class="form-check-input" type="checkbox" name="auditorium"
+                                [checked]="auditorium"> Auditorium&nbsp;&nbsp;
+                            <input class="form-check-input" type="checkbox" name="multipurpose"
+                                [checked]="multipurpose"> Multi Purpose Hall&nbsp;&nbsp;
+                            <input class="form-check-input" type="checkbox" name="classroom"
+                                [checked]="dininghall"> Dining Hall&nbsp;&nbsp;   
+                            <input class="form-check-input" type="checkbox" name="classroom"
+                                [checked]="classroom"> Class Room&nbsp;&nbsp;                               
+                        </label>
+                    </td>
+                </tr>  
+                <tr>
+                    <td align="right"><label for="eventType" class="col-form-label">Service(s) Requested:</label><font color=red>*</font></td>
+                    <td colspan="3">
+                        <label>
+                            <input class="form-check-input" type="checkbox" name="priest"
+                                [checked]="priest"> Priest&nbsp;&nbsp;
+                            <input class="form-check-input" type="checkbox" name="catering"
+                                [checked]="catering"> Catering&nbsp;&nbsp;                            
+                        </label>
+                    </td>
+                </tr>  
+
+                <tr><td colspan="4"></td></tr>   
+                <tr>
+                    <td colspan="4">
+                        <table class="table table-bordered" *ngIf="role == 'ADMIN'">
+                            <thead>
+                                <tr>
+                                    <th ><label class="text-danger">Description</label></th>
+                                    <th ><label class="text-danger">Rent/hr</label></th>
+                                    <th ><label class="text-danger">Hours</label></th>
+                                    <th ><label class="text-danger">Actual Cost</label></th>
+                                    <th ><label class="text-danger">Discount</label></th>
+                                    <th ><label class="text-danger">Adjusted Cost</label></th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let rec of serviceTypes">
+                                <tr>
+                                    <td>
+                                        <label>
+                                            <input class="form-check-input" type="checkbox">&nbsp;{{rec.code}}&nbsp;&nbsp;&nbsp;&nbsp;        
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration">
+                                    </td>
+                                    <td>
+                                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration">
+                                    </td>
+                                    <td>
+                                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration">
+                                    </td>
+                                    <td>
+                                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration" readonly>
+                                    </td>
+                                </tr>
+                            </tbody>
+            
+                          </table>
+            
+                    </td>
+                </tr>        
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="3" align="center">
+                        <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button *ngIf="role != null" type="submit" class="btn btn-warning" >Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button *ngIf="role != null" type="button" class="btn btn-info" > Send Email</button>
+                    </td>
+                  </tr>                               
+                </tbody>
+              </table>
+        </form>
+    </div>
+</div>

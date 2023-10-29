@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td colspan="11"><h4>Priest Request</h4></td>
+        <td >
+          <div *ngIf="this.role == 'ADMIN'; else addRequest">
+            <a class="btn btn-link" [routerLink]="['/facilities/edit', 0]">Add Request</a>
+          </div>
+          <ng-template #addRequest> &nbsp;&nbsp; </ng-template>
+        </td>
+      </tr>
+      <tr>
+        <th ><label class="text-danger">ID</label></th>
+        <th ><label class="text-danger">Date/Time</label></th>
+        <th ><label class="text-danger">Event Name</label></th>
+        <th ><label class="text-danger">Name</label></th>
+        <th ><label class="text-danger">Email/Phone</label></th>
+        <th ><label class="text-danger">Hours</label></th>
+        <th ><label class="text-danger">Count</label></th>
+        <th ><label class="text-danger">Amount</label></th>
+        <th colspan="2"><label class="text-danger">Service</label></th>
+        <th ><label class="text-danger">Status</label></th>
+        <th ><label class="text-danger">Created Date</label></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let rec of summaryReport">
+      <td >
+        <div *ngIf="this.role == 'ADMIN'; else roleTemplate">
+          <label class="colorfy">
+            <a [routerLink]="['/facilities/edit', rec.id]">{{rec.id}}</a>
+          </label>
+        </div>
+        <ng-template #roleTemplate>
+           <label class="colorfy">{{rec.id}}</label>
+         </ng-template>
+      </td>
+      <td [noWrap]=""><label class="colorfy">{{rec.eventDate}}&nbsp;:&nbsp;{{rec.startTime}}</label></td>
+      <td ><label class="colorfy">{{rec.eventName}}</label></td>
+      <td >
+        <label class="colorfy">{{rec.lastName}}&nbsp;-&nbsp;{{rec.firstName}}</label>
+      </td>
+      <td ><label class="colorfy">{{getEmailPhone(rec.phone!, rec.email!)}}</label></td>
+      <td ><label class="colorfy">{{rec.duration!}}</label></td>
+      <td ><label class="colorfy">{{rec.numPeople!}}</label></td>
+      <td ><label class="colorfy">{{rec.amount!}}&nbsp;:&nbsp;{{rec.paid!}}</label></td>
+      <td colspan="2">
+        <label class="text" *ngIf="rec.agreement">Agreement<br></label>
+        <label class="text" *ngIf="rec.auditorium">Auditorium<br></label>
+        <label class="text" *ngIf="rec.multipurpose">MPH<br></label>
+        <label class="text" *ngIf="rec.priest">Priest<br></label>
+        <label class="text" *ngIf="rec.catering">Catering<br></label>
+      </td>
+      <td ><label class="colorfy">{{setStatus(rec.status!)}}</label></td>      
+      <td [noWrap]=""><label class="colorfy">{{rec.createdDate!}}</label></td>      
+    </tbody>
+  </table>
+</div>
