@@ -1,0 +1,70 @@
+/* Styles for the logo */
+.header-gradient {
+	background: linear-gradient(to right, #fbbc34, #ff9307); /* Yellow gradient */
+	color: #fff; /* Text color */
+}
+.logo-title {
+	font: 800 40px Arial;
+	-webkit-text-fill-color: white;
+	-webkit-text-stroke: 1px black;
+	
+	height: auto;
+	font-weight: 100;
+
+
+	font-weight: bold;
+
+  }
+.logo {
+	width: 10%;
+	height: 20px;
+	background: url(./../logo2.png) no-repeat;
+	background-position: 3%;
+}
+
+.text{
+	font-size: 15px;
+	font-style: bold;
+	color: black;
+
+}
+.navbar-brand img {
+	margin-right: 15px;
+	height: auto;
+	font-weight: 100;
+}
+
+/* Override Bootstrap container width to make the navbar full width */
+.container-fluid {
+	padding: 0;
+}
+
+/* Gradient background for the header */
+.header-gradient {
+	background: linear-gradient(to right, #fcc200,#f2ff00); /* Yellow gradient */
+	color: #fff; /* Text color */
+}
+
+.circular-icon {
+	width: 50px; /* Adjust the width and height as needed */
+	height: 50px;
+	background-color: #007bff; /* Circle background color */
+	color: #fff; /* Icon color */
+	border-radius: 50%; /* Makes the container circular */
+	display: flex;
+	flex-direction: column; /* Stack icon and text vertically */
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+
+
+
+/* Styles for the header area */
+.headerArea {
+    border-radius: 8px 8px 0 0;
+    display: block;
+    background: #DD9303;
+}
+

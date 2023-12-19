@@ -1,0 +1,159 @@
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></h4>
+<mat-card>
+    <h1 class="text-danger">&nbsp;Priest</h1>
+    <h4 class="text-danger" *ngIf="this.errorMsg != null">{{ errorMsg }}</h4>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <mat-datepicker #datepicker></mat-datepicker>   
+            <input matInput [matDatepicker]="datepicker" [(ngModel)]="eventDate" name="eventDate"> 
+            <mat-datepicker-toggle matSuffix  [for]="datepicker"></mat-datepicker-toggle> 
+            <mat-datepicker #releasedAtPicker></mat-datepicker>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Time</mat-label>
+            <mat-select #time (selectionChange)="setTime(time.value)" [(ngModel)]="startTime"> 
+                <mat-option value="">Choose pickup time</mat-option>
+                <mat-option *ngFor="let time of times" [value]="time.code">{{time.name}}</mat-option>
+              </mat-select> 
+        </mat-form-field>   
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-label labelPosition="before">Venue</mat-label>
+        <mat-radio-group [(ngModel)]="templeEvent">
+            <mat-radio-button value="T" (click)="setTempleEvent('T')">Temple</mat-radio-button>
+            <mat-radio-button value="O" (click)="setTempleEvent('O')">Outside</mat-radio-button>
+        </mat-radio-group>  
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="lastName" name="lastName"/>
+        </mat-form-field>     
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">First name</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="firstName" name="firstName"/>
+        </mat-form-field>           
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Email</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="emailAddress" name="emailAddress"/>
+        </mat-form-field>  
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Phone</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="phone" name="phone"/>
+        </mat-form-field>         
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Street</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="address" name="address"/>
+        </mat-form-field>  
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">City</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="city" name="city"/>
+        </mat-form-field>         
+    </mat-card-content>    
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">State</mat-label>
+            <mat-select #myState (selectionChange)="setState(myState.value)" [(ngModel)]="state"> 
+                <mat-option value="">Choose pickup State</mat-option>
+                <mat-option *ngFor="let myState of states" [value]="myState.code">{{myState.name}}</mat-option>
+              </mat-select> 
+        </mat-form-field> 
+        <mat-form-field appearance="outline">
+            <mat-label>Details</mat-label>
+            <textarea matInput rows="2" cols="3" [(ngModel)]="message" name="message"></textarea>
+        </mat-form-field>     
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Service</mat-label>
+            <mat-select #mypuja (selectionChange)="onSelectedPuja(mypuja.value)"> 
+                <mat-option value="">Choose pickup Puja</mat-option>
+                <mat-option *ngFor="let mypuja of pujas" [value]="mypuja.id">{{mypuja.pujaName}}</mat-option>
+              </mat-select> 
+        </mat-form-field>   
+        <table class="table table-bordered" cellspacing="2" cellpadding="2" width="60%">
+            <thead>
+                <th>&nbsp;&nbsp;Puja Name</th>
+                <th>&nbsp;&nbsp;Duration</th>
+                <th>&nbsp;&nbsp;Amount</th>
+                <th>&nbsp;&nbsp;Delete</th>
+            </thead>
+            <tbody  *ngFor="let rec of pujaDtl">
+            <tr>
+                <td>
+                    &nbsp;&nbsp;{{rec.pujaName}}
+                </td>
+                <td align="center">&nbsp;&nbsp;{{rec.pujaHours}}</td>
+                <td align="right">&nbsp;&nbsp;${{rec.amount}}</td>
+                <td align="center">&nbsp;&nbsp;
+                <a role="button" (click)="onDeletePuja(rec.pujaId!)">
+                    <i class='fas fa-trash-alt'></i>
+                </a>
+                </td>
+            </tr>
+        </tbody>
+        </table>    
+    </mat-card-content>
+    <div *ngIf="role == 'ADMIN'; else priestTemplate">
+        <mat-card-content class="my-card-content">
+            <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Priest</mat-label>
+                <mat-select #mypriest (selectionChange)="setPriest(mypriest.value)" [(ngModel)]="priestId"> 
+                    <mat-option value="">Choose pickup Priest</mat-option>
+                    <mat-option *ngFor="let mypriest of priests" [value]="mypriest.id">{{mypriest.name}}</mat-option>
+                </mat-select> 
+            </mat-form-field>
+            <mat-label>&nbsp;&nbsp;Amount: </mat-label>
+            <mat-label>{{amount}}</mat-label>    
+        </mat-card-content>
+    </div>
+    <ng-template #priestTemplate>
+        <mat-card-content class="my-card-content">
+            <mat-label>&nbsp;&nbsp;Amount: </mat-label>
+            <mat-label>${{amount}}</mat-label>
+        </mat-card-content>
+    </ng-template>
+    <form (ngSubmit)="onSave()">
+        <div *ngIf="requestId > 0; else roleTemplate">
+        <mat-card-content class="my-card-content">
+            <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button *ngIf="role == 'ADMIN' && cancelButton" type="button" class="btn btn-warning" (click)="openDialog(myDialog, 1)">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button *ngIf="role == 'ADMIN' && emailButton" type="button" class="btn btn-info" (click)="openDialog(myDialog, 2)"> Send Email</button>
+        </mat-card-content>
+        </div>
+        <ng-template #roleTemplate>
+            <button type="submit" class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        </ng-template>
+    </form>
+</mat-card>
+
+<!-- The Modal -->
+<ng-template #myDialog>
+    <h2 matDialogTitle>{{modalTitle}}</h2>
+    <h4 *ngIf="this.errorMsg">
+        <div class="alert-warning">{{errorMsg}}</div>
+    </h4>    
+    <mat-dialog-content>
+      <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td><label  class="col-form-label">Message:&nbsp;</label></td>
+            </tr>
+          <tr>
+            <td>&nbsp;<textarea rows="5" class="form-control" [(ngModel)]="modalMessage"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button matDialogClose class="btn btn-danger">Close</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-success" (click)="onModalSubmit()">Submit</button>
+    </mat-dialog-actions>
+  </ng-template>

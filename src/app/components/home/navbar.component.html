@@ -1,0 +1,16 @@
+<div class="container-fluid">
+<div class="row" *ngIf="isMenubar">
+    <div class="col">
+    <nav class="navbar navbar-light bg-light">
+        <form class="container-fluid justify-content-start">
+                <button *ngIf="home" class="btn btn-outline-success me-2" type="button" (click)="setDiv(1);">Home</button>
+                <button *ngIf="report" class="btn btn-outline-secondary me-2" type="button" (click)="setDiv(8);">Report</button>
+                <button *ngIf="user" class="btn btn-outline-primary me-2" type="button" routerLink="/user">Users</button>
+                <button *ngIf="fileUpload" class="btn btn-outline-danger me-2" type="button" routerLink="/file">File Manager</button>
+                <button *ngIf="setup"class="btn btn-outline-warning me-2" type="button" (click)="setDiv(9);">Setup</button>
+                <button class="btn btn-outline-info me-2" type="button" routerLink="/logout">Logout</button>
+        </form>
+    </nav>
+    </div>
+    </div>
+</div>

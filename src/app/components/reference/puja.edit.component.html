@@ -1,0 +1,47 @@
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></h4>
+<form (ngSubmit)="onSave()" class="form" novalidate>
+<mat-card>
+    <h1 class="text-danger">Edit Puja</h1>
+    <h4 class="text-danger" *ngIf="this.errorMsg != null">{{ errorMsg }}</h4>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Puja Name</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="pujaName" name="pujaName"/>
+        </mat-form-field>      
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Temple Amount</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="amount" name="amount"/>
+        </mat-form-field>     
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Outside Amount</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="outsideAmount" name="outsideAmount"/>
+        </mat-form-field>     
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Duration</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="pujaHours" name="pujaHours"/>
+        </mat-form-field>     
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Details</mat-label>
+            <textarea matInput rows="2" cols="3" [(ngModel)]="pujaDetails" name="pujaDetails"></textarea>
+        </mat-form-field>     
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-label labelPosition="before">Status</mat-label>
+            <mat-radio-group >
+                <mat-radio-button value="A" [checked]="status == 'A'" (click)="status='A'">Active</mat-radio-button>
+                <mat-radio-button value="I" [checked]="status == 'I'" (click)="status='I'">Inactive</mat-radio-button>
+            </mat-radio-group>
+    </mat-card-content>   
+    <br><br>
+    <mat-card-content class="colorfy">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </mat-card-content>
+</mat-card>

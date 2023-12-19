@@ -1,0 +1,171 @@
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></h4>
+<mat-card>
+    <h1 class="text-danger">Facilities</h1>
+    <h4 class="text-danger" *ngIf="this.errorMsg != null">{{ errorMsg }}</h4>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <mat-datepicker #datepicker></mat-datepicker>   
+            <input matInput [matDatepicker]="datepicker" [(ngModel)]="eventDate" name="eventDate"> 
+            <mat-datepicker-toggle matSuffix  [for]="datepicker"></mat-datepicker-toggle> 
+            <mat-datepicker #releasedAtPicker></mat-datepicker>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Time</mat-label>
+            <mat-select #time (selectionChange)="setTime(time.value)" [(ngModel)]="startTime"> 
+                <mat-option value="">Choose pickup time</mat-option>
+                <mat-option *ngFor="let time of times" [value]="time.code">{{time.name}}</mat-option>
+              </mat-select> 
+        </mat-form-field>  
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="lastName" name="lastName"/>
+        </mat-form-field>     
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">First name</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="firstName" name="firstName"/>
+        </mat-form-field>           
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Email</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="emailAddress" name="email"/>
+        </mat-form-field>  
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Phone</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="phone" name="phone"/>
+        </mat-form-field>         
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Street</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="address" name="address"/>
+        </mat-form-field>  
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">City</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="city" name="city"/>
+        </mat-form-field>         
+    </mat-card-content>    
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">State</mat-label>
+            <mat-select #myState (selectionChange)="setState(myState.value)" [(ngModel)]="state"> 
+                <mat-option value="">Choose pickup State</mat-option>
+                <mat-option *ngFor="let myState of states" [value]="myState.code">{{myState.name}}</mat-option>
+              </mat-select> 
+        </mat-form-field> 
+        <mat-form-field appearance="outline">
+            <mat-label>Details</mat-label>
+            <textarea matInput rows="2" cols="3" [(ngModel)]="eventName" name="eventName"></textarea>
+        </mat-form-field>     
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">No. of People</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="numPeople" name="numPeople"/>
+        </mat-form-field>  
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Total hours</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="duration" name="duration"/>
+        </mat-form-field>         
+    </mat-card-content>   
+    <mat-card-content class="my-card-content">
+        <mat-label labelPosition="before">Event Type</mat-label>
+        <mat-radio-group [(ngModel)]="eventType">
+            <mat-radio-button value="F" (click)="setType('F')">Family</mat-radio-button>
+            <mat-radio-button value="O" (click)="setType('O')">Organization</mat-radio-button>
+        </mat-radio-group>  
+    </mat-card-content>    
+    <mat-card-content class="my-card-content">
+        <mat-label labelPosition="before">Facilities Requested</mat-label>
+        <mat-checkbox  [(ngModel)] = "auditorium" (change)="setFacilitiesRequest($event.checked,1)"> auditorium </mat-checkbox>
+        <mat-checkbox  [(ngModel)] = "multipurpose" (change)="setFacilitiesRequest($event.checked,2)"> Mini Hall </mat-checkbox>
+        <mat-checkbox  [(ngModel)] = "dininghall" (change)="setFacilitiesRequest($event.checked,3)"> Dining Hall </mat-checkbox>
+        <mat-checkbox  [(ngModel)] = "classroom" (change)="setFacilitiesRequest($event.checked,4)"> classroom </mat-checkbox>
+    </mat-card-content>  
+    <mat-card-content class="my-card-content">
+        <mat-label labelPosition="before">Service Requested</mat-label>
+        <mat-checkbox  [(ngModel)] = "catering" (change)="setFacilitiesRequest($event.checked,5)"> Catering </mat-checkbox>
+        <mat-checkbox  [(ngModel)] = "priest" (change)="setFacilitiesRequest($event.checked,6)"> Priest </mat-checkbox>
+    </mat-card-content>  
+
+    <mat-card-content class="my-card-content" *ngIf="requestId > 0">
+        <table>
+            <thead>
+                <tr>
+                    <th ><label class="text-danger">Description</label></th>
+                    <th ><label class="text-danger">Rent/hr</label></th>
+                    <th ><label class="text-danger">Hours</label></th>
+                    <th ><label class="text-danger">Actual Cost</label></th>
+                    <th ><label class="text-danger">Discount</label></th>
+                    <th ><label class="text-danger">Adjusted Cost</label></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let rec of serviceTypes">
+                <tr>
+                    <td>
+                        <label>
+                            <input class="form-check-input" type="checkbox">&nbsp;{{rec.code}}&nbsp;&nbsp;&nbsp;&nbsp;        
+                        </label>
+                    </td>
+                    <td>
+                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration">
+                    </td>
+                    <td>
+                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration">
+                    </td>
+                    <td>
+                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration" readonly>
+                    </td>
+                    <td>
+                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration">
+                    </td>
+                    <td>
+                        <input type="text" maxlength="10" size="10" class="form-control" id="duration" [(ngModel)]="duration"  name="duration" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+
+    <form (ngSubmit)="onSave()">
+        <div *ngIf="requestId > 0; else roleTemplate">
+            <mat-card-content class="my-card-content">
+            <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button *ngIf="cancelButton" type="button" class="btn btn-warning" (click)="openDialog(myDialog, 1)">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button *ngIf="emailButton" type="button" class="btn btn-info" (click)="openDialog(myDialog, 2)"> Send Email</button>
+        </mat-card-content>
+        </div>
+        <ng-template #roleTemplate>
+            <button type="submit" class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        </ng-template>
+    </form>           
+</mat-card>
+  <!-- The Modal -->
+<!-- The Modal -->
+<ng-template #myDialog>
+    <h2 matDialogTitle>{{modalTitle}}</h2>
+    <h4 *ngIf="this.errorMsg">
+        <div class="alert-warning">{{errorMsg}}</div>
+    </h4>    
+    <mat-dialog-content>
+      <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td><label  class="col-form-label">Message:&nbsp;</label></td>
+            </tr>
+          <tr>
+            <td>&nbsp;<textarea rows="5" class="form-control" [(ngModel)]="modalMessage"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button matDialogClose class="btn btn-danger">Close</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-success" (click)="onModalSubmit()">Submit</button>
+    </mat-dialog-actions>
+  </ng-template>  

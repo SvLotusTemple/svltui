@@ -1,0 +1,47 @@
+<br>
+<div class="col-md-6  my-card-content">
+  <h4>Login</h4>
+  <form (ngSubmit)="onLogin()" novalidate>
+    <div>
+      <h2 *ngIf="this.errorMsg != null">{{ errorMsg }}</h2>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>email address</mat-label>
+        <input matInput
+        type="text"
+        class="form-control"
+        id="username"
+        [(ngModel)]="loginRequest.username"
+        name="username"/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>password</mat-label>
+      <input matInput
+        type="password"
+        class="form-control"
+        id="password"
+        [(ngModel)]="loginRequest.password"
+        name="password"/>
+      </mat-form-field>
+      <br>
+    </div>
+    <div>
+      <br>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <br>
+      <button type="button" class="btn btn-success" (click)="openDialog(myDialog)">new user</button>
+    </div>
+  </form>
+</div>
+<ng-template #myDialog>
+  <h2 matDialogTitle>Dialog!</h2>
+  <mat-dialog-content>
+    <p>The content of this dialog came from an <code>ng-template</code>! Amazing, right?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose color="primary">Dismiss</button>
+  </mat-dialog-actions>
+</ng-template>

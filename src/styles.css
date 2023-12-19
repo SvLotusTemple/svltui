@@ -1,1 +1,108 @@
 /* You can add global styles to this file, and also import other style files */
+
+.modal-dialog {
+  overflow-y: initial !important;
+}
+.modal-body{
+  max-height: 410px;
+  overflow-y: auto;
+}
+.modal-body-outer {
+  overflow-y: scroll;
+  height: 565px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+.modal-svlt {
+  width: 80px;
+  margin: 120px auto;
+  text-shadow: none !important;
+}
+.modal-content {
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+  box-shadow: 5px 10px #888;
+  border: 1px solid #000;
+}
+.modalButton {
+  visibility: visible;
+}
+
+
+.user-heading{
+  color: #000103;
+  font-size: 24px; 
+  font-weight: bold; 
+  align-items: center;
+} 
+
+.custom-form {
+  max-width: 600px; /* Adjust this value as needed */
+  margin: 0 auto;
+}
+
+.custom-form .form-control {
+  width: 100%; /* Make input fields 100% width within the form */
+}
+
+.custom-form .custom-select {
+  width: 100%; /* Make select elements 100% width within the form */
+}
+.form-size{
+max-width: 600px;
+}
+/* ****************************** */
+
+/* Customize styles for the table */
+table.table {
+border-collapse: collapse;
+width: 100%;
+}
+
+.table thead th {
+vertical-align: bottom;
+border-bottom: 2px solid #000000; 
+}
+
+table.table th {
+background-color: #ebeae5; /* Header background color */
+border: 2px solid #000000; /* Header border */
+padding: 10px;
+text-align: center;
+font-weight: bold;
+border-bottom:  #000000;
+}
+
+table.table th, table.table td {
+border: 2px solid #020202;
+padding: 8px;
+text-align: center;
+}
+table thead th {
+border-bottom: 2px solid #000;
+}
+
+/* Add some spacing */
+h3 {
+margin-top: 20px;
+}
+
+.d-flex {
+margin-top: 20px;
+}
+
+/* Add color to links */
+a.btn-info {
+color: #fff;
+background-color: #17a2b8;
+border-color: #1ea8bd;
+}
+
+/* Color for labels */
+label.colorfy {
+color: #0e021a; /* You can change the color as needed */
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

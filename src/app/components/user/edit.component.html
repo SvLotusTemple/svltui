@@ -1,0 +1,44 @@
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></h4>
+<form (ngSubmit)="onSave()" class="form" novalidate>
+<mat-card>
+    <h1 class="text-danger">Edit user</h1>
+    <h4 class="text-danger" *ngIf="this.errorMsg != null">{{ errorMsg }}</h4>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="lastName" name="lastName"/>
+        </mat-form-field>      
+    </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="firstName" name="firstName"/>
+        </mat-form-field>     
+    </mat-card-content>
+
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="emailAddress" name="emailAddress"/>
+        </mat-form-field>     
+    </mat-card-content>
+
+    <mat-card-content class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="phone" name="phone"/>
+        </mat-form-field>     
+    </mat-card-content>
+
+    <mat-card-content class="my-card-content">
+        <mat-label labelPosition="before">Status</mat-label>
+            <mat-radio-group >
+                <mat-radio-button value="A" [checked]="status == 'A'" (click)="setStatusButton('A')">Active</mat-radio-button>
+                <mat-radio-button value="I" [checked]="status == 'I'" (click)="setStatusButton('I')">Inactive</mat-radio-button>
+            </mat-radio-group>
+    </mat-card-content><br><br>
+    <mat-card-content class="colorfy">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </mat-card-content>
+</mat-card>
+</form>

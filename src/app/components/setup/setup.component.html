@@ -1,0 +1,19 @@
+<div class="container">
+  <h1 class="text-danger">Reference Table</h1>
+
+
+  <div *ngIf="moduleId == 4">
+    <mat-card>
+      <mat-card-content>
+        <a [routerLink]="['/reference/puja']">Puja</a>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="moduleId == 5">
+    <mat-card>
+      <mat-card-content>
+        <a [routerLink]="['/reference/facilities/serviceytpe']">Service Charge</a>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

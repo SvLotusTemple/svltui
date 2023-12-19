@@ -1,0 +1,87 @@
+<mat-card>
+  <mat-card-header>
+<mat-form-field>
+  <input matInput (keyup)="filterChange($event)" placeholder="Filter" />
+</mat-form-field>
+<button style="margin-left: 70%;"  mat-raised-button color="accent" (click)="openDialog(myDialog)">Add file (+)</button>
+
+  </mat-card-header>
+  <mat-card-content>
+<table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="delete">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="this.role == 'ADMIN' && moduleId==6; else deleteFile">
+          <input type="checkbox" name="showid" value="{{element.id}}" (click)="setArchive(element.id!)" />
+        </div>
+        <ng-template #deleteFile>
+          <a (click)="delete(element.hashCd!)">
+            <i class="fa fa-trash" style="color:rgb(92, 29, 29)" aria-hidden="true"></i>
+          </a>
+        </ng-template>   
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="fileName">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> File Name</th>
+      <td mat-cell *matCellDef="let element">
+        <a href="{{element.awsS3FileUrl}}">{{element.fileName}}</a>
+      </td>
+    </ng-container>
+   <ng-container matColumnDef="date">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Date</th>
+      <td mat-cell *matCellDef="let element">{{convertDate(element.createdDate!)}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="createBy">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Created By</th>
+      <td mat-cell *matCellDef="let element">{{element.userName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Status</th>
+      <td mat-cell *matCellDef="let element">{{convertStatus(element.status!)}}</td>
+    </ng-container>
+    <ng-container matColumnDef="comments">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Comments</th>
+      <td mat-cell *matCellDef="let element">{{element.message}}</td>
+    </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+
+</table>
+
+</mat-card-content>
+<br>
+<mat-card-footer>
+
+  <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
+</mat-card-footer>
+</mat-card>
+
+<!-- The Modal -->
+<ng-template #myDialog>
+  <h2 matDialogTitle>File upload</h2>
+  <mat-dialog-content>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td width="30%" class="text-body" scope="row">File: </td>
+          <td width="70%">
+            <input type="file" (change)="addFile($event)" #fileUpload>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-dark">Message: </td>
+          <td>&nbsp;<input type="text" [(ngModel)]="message">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matDialogClose class="btn btn-danger">Close</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-success" (click)="onSave()">Submit</button>
+  </mat-dialog-actions>
+</ng-template>

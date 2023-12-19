@@ -1,0 +1,12 @@
+<br />
+<br />
+<div class="container">
+
+
+<mat-card>
+  <h1 class="text-danger">Select Module</h1>
+  <mat-card-content class="my-card-content" *ngFor="let rec of modules">
+    <button mat-button  (click)="onSelect(rec)">{{rec.substring(0,rec.indexOf("_"))}}</button>  
+    </mat-card-content>
+  </mat-card>
+</div>

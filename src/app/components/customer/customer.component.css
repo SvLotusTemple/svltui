@@ -1,0 +1,64 @@
+mat-card{
+    margin: 2%;
+}
+
+button{
+    margin: 2px;
+}
+
+th{
+    background-color: #fddf48 !important;
+    color: white;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+    height: 20 !important;
+}
+::ng-deep .mat-mdc-form-field-flex {
+    margin-top: -1px !important;
+}
+
+.my-card-content {
+    margin-right: 100px;
+    margin-left: 100px;
+    padding-right: 1.5em;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.confirmation-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
