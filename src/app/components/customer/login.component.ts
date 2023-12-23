@@ -71,6 +71,10 @@ export class CustomerLoginComponent implements OnInit {
   openDialog(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
   }
+  guestLogin() {
+    sessionStorage.setItem('customerId', '-1');
+    this.router.navigateByUrl(moduleName+'/request');
+  }
   cleanup() {
     sessionStorage.removeItem('users');
     sessionStorage.removeItem('username');

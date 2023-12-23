@@ -45,12 +45,14 @@ export class EventRequestComponent implements OnInit {
   modalMessage?: string;
   modalTitle?: string;
   isExists?: Boolean;
+  customerId?: number;
   emailButton?: Boolean;
   cancelButton?: Boolean;
   constructor(private router: Router, private route: ActivatedRoute, private commonSrv: CommonService,private dialog: MatDialog) {
     console.log('EventRequestComponent: constructor');
     this.requestId = Number(this.route.snapshot.paramMap.get('id'));
     this.moduleId = Number(sessionStorage.getItem('moduleId'));
+    this.customerId = Number(sessionStorage.getItem('customerId'));
     this.role = sessionStorage.getItem('role')!;
     this.getTimes();
     this.getStates();
