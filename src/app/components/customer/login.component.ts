@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginResponse, JwtResponse } from '../../models/user';
 import { LoginRequest } from '../../models/user';
@@ -6,7 +6,6 @@ import { CommonService } from 'src/app/services/common.service';
 import { RefModel } from 'src/app/models/reference';
 import { CommonConstants } from '../util/CommonConstant';
 import { DataSharingService } from 'src/app/services/dataSharing.service';
-import { MatDialog } from '@angular/material/dialog';
 declare var getClaimsFromToken: any;
 
 @Component({
@@ -20,12 +19,12 @@ export class CustomerLoginComponent implements OnInit {
   loginRequest: LoginRequest = new LoginRequest();
   loginResponse!: LoginResponse;
   roleModules!: RefModel[];
+  moduleName?: string;
   errorMsg!: string;
   constructor(private router: Router, 
     private commonSrv: CommonService, 
     private dataSharingService: DataSharingService, 
-    private cdref: ChangeDetectorRef, 
-    private dialog: MatDialog) {
+    private cdref: ChangeDetectorRef) {
       console.log ('CustomerLoginComponent');
     this.loginRequest = new LoginRequest();
     dataSharingService.isMenubar.next(false);
@@ -44,7 +43,6 @@ export class CustomerLoginComponent implements OnInit {
   onLogin(): void {
     this.commonSrv.validateLogin(this.loginRequest, true)
       .subscribe((resp: JwtResponse) => {
-        let moduleName: string;
         sessionStorage.setItem('jwtResponse', '' + JSON.stringify(resp));
         sessionStorage.setItem('accessToken', '' + resp.token);
         sessionStorage.setItem('username', '' + resp.lastName+", "+resp.firstName);
@@ -53,14 +51,14 @@ export class CustomerLoginComponent implements OnInit {
           if (resp.roles.find(x => x === role.name)) {
             sessionStorage.setItem('moduleId', '' + role.subId);
             sessionStorage.setItem('role', '' + role.name!.substring(role.name!.indexOf("_")+1));
-            moduleName = role.subName != null ? role.subName.toLowerCase(): "";
-            console.log(moduleName +"---"+role.subName+"---")
+            this.moduleName = role.subName != null ? role.subName.toLowerCase(): "";
+            console.log(this.moduleName +"---"+role.subName+"---")
             this.dataSharingService.isMenubar.next(true);
             this.cdref.detectChanges();
             break;
           }
         }
-        this.router.navigateByUrl(moduleName+'/history');
+        this.router.navigateByUrl(this.moduleName+'/history');
       },
         error => {
           this.errorMsg = 'Invalid Login';
@@ -68,12 +66,12 @@ export class CustomerLoginComponent implements OnInit {
 
       );
   }
-  openDialog(templateRef: TemplateRef<any>) {
-    this.dialog.open(templateRef);
+  registration() {
+    this.router.navigateByUrl('customer/registration');
   }
   guestLogin() {
     sessionStorage.setItem('customerId', '-1');
-    this.router.navigateByUrl(moduleName+'/request');
+    this.router.navigateByUrl('customer/request/0');
   }
   cleanup() {
     sessionStorage.removeItem('users');

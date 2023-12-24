@@ -25,15 +25,17 @@ export class CustomerVerifyComponent implements OnInit {
     this.getRoles();
     this.commonSrv.validateKey(this.key, "login/customer")
       .subscribe((resp: JwtResponse) => {
-        console.log('Verify: '+resp.firstName);
-        sessionStorage.setItem('jwtResponse', '' + JSON.stringify(resp));
-        sessionStorage.setItem('accessToken', '' + resp.token);
-        sessionStorage.setItem('username', '' + resp.lastName+", "+resp.firstName);
-        if ( resp.roles != null) {
-          for (const role of this.roleModules) {
-                sessionStorage.setItem('moduleId', '' + role.subId);
-                sessionStorage.setItem('role', '' + role.name!.substring(role.name!.indexOf("_")+1));
-            }
+        if (resp != null) {
+          console.log('Verify: '+resp.firstName);
+          sessionStorage.setItem('jwtResponse', '' + JSON.stringify(resp));
+          sessionStorage.setItem('accessToken', '' + resp.token);
+          sessionStorage.setItem('username', '' + resp.lastName+", "+resp.firstName);
+          if ( resp.roles != null) {
+            for (const role of this.roleModules) {
+                  sessionStorage.setItem('moduleId', '' + role.subId);
+                  sessionStorage.setItem('role', '' + role.name!.substring(role.name!.indexOf("_")+1));
+              }
+          }
         }
         this.router.navigateByUrl('/customer/changepassword');
       },

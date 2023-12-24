@@ -68,7 +68,7 @@ export class CustomerChangepasswordComponent implements OnInit {
                         if (this.roles != null && this.roles.indexOf(",")>0) {
                             this.router.navigateByUrl('/module');
                         } else {
-                            this.router.navigateByUrl('/home');
+                            this.router.navigateByUrl('/customer/history');
                         }
                     }
                 },
