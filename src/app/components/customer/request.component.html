@@ -1,6 +1,6 @@
 <h4>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></h4>
 <mat-card>
-    <h1 class="text-danger">&nbsp;Priest</h1>
+    <h1 class="text-danger">&nbsp;Event Request</h1>
     <h4 class="text-danger" *ngIf="this.errorMsg != null">{{ errorMsg }}</h4>
     <mat-card-content class="my-card-content">
         <mat-form-field appearance="fill">
@@ -20,13 +20,42 @@
     </mat-card-content>
     <mat-card-content class="my-card-content">
         <mat-label labelPosition="before">Venue</mat-label>
-        <mat-radio-group [(ngModel)]="templeEvent">
-            <mat-radio-button value="T" (click)="setTempleEvent('T')">Temple</mat-radio-button>
-            <mat-radio-button value="O" (click)="setTempleEvent('O')">Outside</mat-radio-button>
+        <mat-radio-group>
+            <mat-radio-button value="Y" (click)="setTempleEvent('Y')">Temple</mat-radio-button>
+            <mat-radio-button value="N" (click)="setTempleEvent('N')">Outside</mat-radio-button>
         </mat-radio-group>  
     </mat-card-content>
+    <mat-card-content class="my-card-content">
+        <mat-label labelPosition="before">Event Type</mat-label>
+        <mat-radio-group [(ngModel)]="eventType">
+            <mat-radio-button value="F" (click)="setEventType('F')">Family</mat-radio-button>
+            <mat-radio-button value="O" (click)="setEventType('O')">Organization</mat-radio-button>
+        </mat-radio-group>  
+    </mat-card-content>    
+    <mat-card-content class="my-card-content">
+        <mat-label labelPosition="before">Service Requested</mat-label>
+        <mat-checkbox  *ngIf="templeEvent=='Y'" [(ngModel)] = "catering" (change)="setServiceType($event.checked,1)"> Catering </mat-checkbox>
+        <mat-checkbox  [(ngModel)] = "priest" (change)="setServiceType($event.checked,2)"> Priest </mat-checkbox>
+        <mat-checkbox  *ngIf="templeEvent=='Y'" [(ngModel)] = "facilities" (change)="setServiceType($event.checked,3)"> Facilities </mat-checkbox>
+    </mat-card-content>  
+    <mat-card-content *ngIf="templeEvent=='Y' && facilities=='Y'" class="my-card-content">
+            <mat-label labelPosition="before">Facilities Requested</mat-label>
+            <mat-checkbox  [(ngModel)] = "auditorium" (change)="setFacilitiesRequest($event.checked,1)"> Auditorium </mat-checkbox>
+            <mat-checkbox  [(ngModel)] = "multipurpose" (change)="setFacilitiesRequest($event.checked,2)"> Mini Hall </mat-checkbox>
+            <mat-checkbox  [(ngModel)] = "dininghall" (change)="setFacilitiesRequest($event.checked,3)"> Dining Hall </mat-checkbox>
+            <mat-checkbox  [(ngModel)] = "classroom" (change)="setFacilitiesRequest($event.checked,4)"> Classroom </mat-checkbox>
+    </mat-card-content>  
+    <mat-card-content *ngIf="templeEvent=='Y'" class="my-card-content">
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">No. of People</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="numPeople" name="numPeople"/>
+        </mat-form-field>  
+        <mat-form-field appearance="outline">
+            <mat-label labelPosition="before">Total hours</mat-label>
+            <input matInput type="text" class="form-control" [(ngModel)]="duration" name="duration"/>
+        </mat-form-field>         
+    </mat-card-content> 
     <div *ngIf="customerId == -1">
-
         <mat-card-content class="my-card-content">
             <mat-form-field appearance="outline">
                 <mat-label>Last name</mat-label>
@@ -74,37 +103,39 @@
             <textarea matInput rows="2" cols="3" [(ngModel)]="message" name="message"></textarea>
         </mat-form-field>     
     </mat-card-content>
-    <mat-card-content class="my-card-content">
-        <mat-form-field appearance="outline">
-            <mat-label labelPosition="before">Service</mat-label>
-            <mat-select #mypuja (selectionChange)="onSelectedPuja(mypuja.value)"> 
-                <mat-option value="">Choose pickup Puja</mat-option>
-                <mat-option *ngFor="let mypuja of pujas" [value]="mypuja.id">{{mypuja.pujaName}}</mat-option>
-              </mat-select> 
-        </mat-form-field>   
-        <table class="table table-bordered" cellspacing="2" cellpadding="2" width="60%">
-            <thead>
-                <th>&nbsp;&nbsp;Puja Name</th>
-                <th>&nbsp;&nbsp;Duration</th>
-                <th>&nbsp;&nbsp;Amount</th>
-                <th>&nbsp;&nbsp;Delete</th>
-            </thead>
-            <tbody  *ngFor="let rec of pujaDtl">
-            <tr>
-                <td>
-                    &nbsp;&nbsp;{{rec.pujaName}}
-                </td>
-                <td align="center">&nbsp;&nbsp;{{rec.pujaHours}}</td>
-                <td align="right">&nbsp;&nbsp;${{rec.amount}}</td>
-                <td align="center">&nbsp;&nbsp;
-                <a role="button" (click)="onDeletePuja(rec.pujaId!)">
-                    <i class='fas fa-trash-alt'></i>
-                </a>
-                </td>
-            </tr>
-        </tbody>
-        </table>    
-    </mat-card-content>
+    <div *ngIf="priest=='Y'">
+        <mat-card-content class="my-card-content">
+            <mat-form-field appearance="outline">
+                <mat-label labelPosition="before">Service</mat-label>
+                <mat-select #mypuja (selectionChange)="onSelectedPuja(mypuja.value)"> 
+                    <mat-option value="">Choose pickup Puja</mat-option>
+                    <mat-option *ngFor="let mypuja of pujas" [value]="mypuja.id">{{mypuja.pujaName}}</mat-option>
+                  </mat-select> 
+            </mat-form-field>   
+            <table class="table table-bordered" cellspacing="2" cellpadding="2" width="60%">
+                <thead>
+                    <th>&nbsp;&nbsp;Puja Name</th>
+                    <th>&nbsp;&nbsp;Duration</th>
+                    <th>&nbsp;&nbsp;Amount</th>
+                    <th>&nbsp;&nbsp;Delete</th>
+                </thead>
+                <tbody  *ngFor="let rec of pujaDtl">
+                <tr>
+                    <td>
+                        &nbsp;&nbsp;{{rec.pujaName}}
+                    </td>
+                    <td align="center">&nbsp;&nbsp;{{rec.pujaHours}}</td>
+                    <td align="right">&nbsp;&nbsp;${{rec.amount}}</td>
+                    <td align="center">&nbsp;&nbsp;
+                    <a role="button" (click)="onDeletePuja(rec.pujaId!)">
+                        <i class='fas fa-trash-alt'></i>
+                    </a>
+                    </td>
+                </tr>
+            </tbody>
+            </table>    
+        </mat-card-content>    
+    </div>
     <div *ngIf="role == 'ADMIN'; else priestTemplate">
         <mat-card-content class="my-card-content">
             <mat-form-field appearance="outline">

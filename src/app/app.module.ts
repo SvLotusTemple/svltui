@@ -43,6 +43,7 @@ import { CustomerHistoryComponent } from './components/customer/history.componen
 import { RegistrationComponent } from './components/customer/registration.component';
 import { RegistrationSuccessComponent } from './components/customer/registrationSuccess.component';
 import { EventRequestComponent } from './components/customer/request.component';
+import { GuestRequestSuccessComponent } from './components/customer/guestRequestSuccess.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { EventRequestComponent } from './components/customer/request.component';
     CustomerHistoryComponent,
     RegistrationComponent,
     RegistrationSuccessComponent,
+    GuestRequestSuccessComponent,
     ChangepasswordComponent,
     ModuleComponent,
     VerifyComponent,

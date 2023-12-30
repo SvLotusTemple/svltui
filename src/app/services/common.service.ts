@@ -89,6 +89,9 @@ export class CommonService {
         return this.http.get<EventRequest>(this.url + 'request/findId/' + requestId);
     }
     saveRequest(request: EventRequest): Observable<EventRequest> {
+        if (request.customerId==-1) {
+            return this.http.post(this.url + 'login/guest/request/save', request);
+        }
         return this.http.post(this.url + 'request/save', request);
     }
 

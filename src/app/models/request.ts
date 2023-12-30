@@ -43,8 +43,9 @@ export class EventRequest {
     multipurpose?: boolean;
     dininghall?: boolean;
     classroom?: boolean;
-    priest?: boolean;
-    catering?: boolean;
+    priest?: string;
+    catering?: string;
+    facilities?: string;
     payments?: Array<Payment> = [];
     priestDetails?: Array<PriestRequestDetail> = [];
     facilitiesDetails?: Array<FacilitiesEventDetails> = [];

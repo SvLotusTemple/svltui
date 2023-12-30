@@ -98,8 +98,8 @@ export class PriestEditComponent implements OnInit {
     } else {
       this.requestId=0;
       this.request = new EventRequest();
-      this.request.templeEvent = "Y";
-      this.templeEvent = "Y";
+      this.request.templeEvent = 'Y';
+      this.templeEvent = 'Y';
       this.pujaDtl = [];
       this.emailButton = false;
       this.cancelButton = false;
@@ -110,7 +110,11 @@ export class PriestEditComponent implements OnInit {
     return CommonUtils.convertDate(number);
   }
   setTempleEvent(str: string): void {
-    this.templeEvent = str;
+    if (str=='T') {
+      this.templeEvent = 'Y';
+    } else {
+      this.templeEvent = 'N';
+    }
     this.request!.templeEvent = this.templeEvent;
   }
   getPriest() {
@@ -190,7 +194,7 @@ export class PriestEditComponent implements OnInit {
           puja.pujaId = p.id;
           puja.pujaHours = p.pujaHours;
           puja.pujaName = p.pujaName;
-          puja.amount = this.templeEvent == 'Y' ? p.amount : p.outsideAmount;
+          puja.amount = this.templeEvent ? p.amount : p.outsideAmount;
           this.pujaDtl.push(puja);
           console.log("--" + puja.pujaId+" : "+puja.pujaName+" : "+puja.amount);
           this.amount+=puja.amount;

@@ -44,8 +44,8 @@ export class FacilitiesEditComponent implements OnInit {
   multipurpose?: boolean;
   dininghall?: boolean;
   classroom?: boolean;
-  priest?: boolean;
-  catering?: boolean;
+  priest?: string;
+  catering?: string;
   paid?: any;
   payments?: Array<Payment> = [];
   times?: RefModel[];
@@ -110,9 +110,9 @@ export class FacilitiesEditComponent implements OnInit {
           else if (r.serviceTypeId == 2) 
             this.multipurpose = true;
           else if (r.serviceTypeId == 3)
-            this.catering = true;
+            this.catering = 'Y';
           else if (r.serviceTypeId == 4) 
-            this.priest = true;
+            this.priest = 'Y';
           else if (r.serviceTypeId == 5) 
             this.classroom = true;
           else if (r.serviceTypeId == 7) 

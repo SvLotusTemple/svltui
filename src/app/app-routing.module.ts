@@ -28,12 +28,14 @@ import { CustomerHistoryComponent } from './components/customer/history.componen
 import { EventRequestComponent } from './components/customer/request.component';
 import { RegistrationComponent } from './components/customer/registration.component';
 import { RegistrationSuccessComponent } from './components/customer/registrationSuccess.component';
+import { GuestRequestSuccessComponent } from './components/customer/guestRequestSuccess.component';
 const appRoutes: Routes = [
 
   { path: 'customer/login', component: CustomerLoginComponent },
   { path: 'customer/request/:id', component: EventRequestComponent },  
   { path: 'customer/registration', component: RegistrationComponent },  
   { path: 'customer/registrationSuccess', component: RegistrationSuccessComponent },
+  { path: 'customer/guestRequestSuccess', component: GuestRequestSuccessComponent },
   { path: 'customer/changepassword', component: CustomerChangepasswordComponent },
   { path: 'customer/history', component: CustomerHistoryComponent },
   { path: 'customer/verify/:key', component: CustomerVerifyComponent},
