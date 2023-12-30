@@ -3,7 +3,7 @@ export const environment = {
   menuId: 1,
   sponser: '',
   dynhtml: '',
-  url: 'https://107.21.33.150:9443/',
+  url: 'https://svlotustemple.com/api/',
 //  url: 'http://localhost:9443/',
 //  url: '/api/',
 };
