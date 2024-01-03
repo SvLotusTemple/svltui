@@ -9,7 +9,7 @@ import { PujaModel, RefModel} from '../models/reference';
 import { User } from '../models/user';
 import { UploadFileRequest } from '../models/upload';
 import { EventRequest, RequestSummary } from '../models/request';
-import { Acknowledge, Customer } from '../models/common';
+import { Acknowledge, Customer, PaymentReport, PaymentSummaryRequest } from '../models/common';
 
 @Injectable()
 export class CommonService {
@@ -108,6 +108,10 @@ export class CommonService {
     }
     customerHistory(): Observable<EventRequest[]> {
         return this.http.get<EventRequest[]>(this.url + 'request/history');
+    }
+    // payment
+    getPaymentSummary(request: PaymentSummaryRequest): Observable<PaymentReport[]> {
+        return this.http.post<PaymentReport[]>(this.url + 'report/general/summary', request);
     }
 
 }

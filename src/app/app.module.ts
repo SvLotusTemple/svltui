@@ -44,7 +44,9 @@ import { RegistrationComponent } from './components/customer/registration.compon
 import { RegistrationSuccessComponent } from './components/customer/registrationSuccess.component';
 import { EventRequestComponent } from './components/customer/request.component';
 import { GuestRequestSuccessComponent } from './components/customer/guestRequestSuccess.component';
-
+import { VastramHomeComponent } from './components/vastram/vastram.component';
+import { VastramSaleComponent } from './components/vastram/payment.component';
+import { LotusAcademyHomeComponent } from './components/lotusadacedmy/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +79,9 @@ import { GuestRequestSuccessComponent } from './components/customer/guestRequest
     FacilitiesEditComponent,
     FacilitiesSDComponent,
     FacilitiesAgreementComponent,
+    VastramHomeComponent,
+    VastramSaleComponent,
+    LotusAcademyHomeComponent,
     LogoutComponent
   ],
   imports: [

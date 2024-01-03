@@ -1,4 +1,4 @@
-export class Payment {
+export class PaymentReport {
     id?: number;
     moduleId?: number;
     sourceId?: number;
@@ -55,4 +55,20 @@ export class Acknowledge {
         this.status = status;
     }
 }
-
+export class Payment {
+    moduleId?: number;
+    sourceId?: number;
+    amount?: any;
+    paymentMode?: string; // check chk or cash cash or cc 
+    phone?:	string;
+    emailAddress?: string;	
+    nameOnCard?: string;	
+    number?: string;	
+    expiryDate?: string;	
+    cvv?: string;	
+}
+export class PaymentSummaryRequest {
+    moduleId?: number;
+    startDate?: Date;
+    endDate?: Date;
+}

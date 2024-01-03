@@ -17,7 +17,7 @@ export class CommonUtils {
   }
   static convertMonDay(number: Date): string {
     let newDate = new Date(number);
-    return  (newDate.getMonth() + 1) + "-"+newDate.getDate() 
+    return  ('0'+(newDate.getMonth() + 1)).substring(-2) + "-"+('0'+newDate.getDate()).substring(-2); 
   }
   static getAddress(address: string, city: string, state: string, zip: string): string {
     let addressStr = address;

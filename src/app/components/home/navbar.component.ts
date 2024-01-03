@@ -72,6 +72,9 @@ export class NavbarComponent implements OnInit {
 //        4	PRIEST
 //        5	FACILITY
 //        6	FILE_UPLOAD
+//        7	CUSTOMER
+//        8	VASTRAM
+//        9	LOTUSACADEMY
         if (id == 2) {
             this.path="/catering";
         } else if (id == 3){
@@ -82,6 +85,12 @@ export class NavbarComponent implements OnInit {
             this.path="/facilities";
         } else if (id == 6){
             this.path="/upload";
+        } else if (id == 7){
+            this.path="/customer/history";
+        } else if (id == 8){
+            this.path="/vastram";
+        } else if (id == 9){
+            this.path="/lotusacademy";
         } else {
             this.path="";
         }
