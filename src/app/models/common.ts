@@ -72,3 +72,10 @@ export class PaymentSummaryRequest {
     startDate?: Date;
     endDate?: Date;
 }
+export class EmailRequest {
+    requestId?: number;
+    moduleId?: number;
+    customerId?: number;
+    emailAddress?: string;	
+    message?: string;	
+}

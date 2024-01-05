@@ -1,4 +1,4 @@
-import { Customer, FacilitiesEventDetails, Payment, PriestRequestDetail } from "./common";
+import { Customer, FacilitiesEventDetails, Payment, PaymentReport, PriestRequestDetail } from "./common";
 
 export class RequestSummary {
     requestId?: number;
@@ -50,3 +50,18 @@ export class EventRequest {
     priestDetails?: Array<PriestRequestDetail> = [];
     facilitiesDetails?: Array<FacilitiesEventDetails> = [];
 }
+export class GeneralRequest {
+    id?: number;
+    moduleId?: number;
+    createdDate?: Date;
+    updatedDate?: Date;
+    amount?: any;
+    comments?: string;
+    status?: string;	
+    firstName?: string;	
+    lastName?: string;	
+    phone?:	string;
+    emailAddress?: string;	
+    paymentReport?: Array<PaymentReport> = [];
+}
+

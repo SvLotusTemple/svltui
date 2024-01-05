@@ -47,6 +47,8 @@ import { GuestRequestSuccessComponent } from './components/customer/guestRequest
 import { VastramHomeComponent } from './components/vastram/vastram.component';
 import { VastramSaleComponent } from './components/vastram/payment.component';
 import { LotusAcademyHomeComponent } from './components/lotusadacedmy/home.component';
+import { LotusAcademyEditComponent } from './components/lotusadacedmy/edit.component';
+import { LotusAcademyPaymentComponent } from './components/lotusadacedmy/payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +84,8 @@ import { LotusAcademyHomeComponent } from './components/lotusadacedmy/home.compo
     VastramHomeComponent,
     VastramSaleComponent,
     LotusAcademyHomeComponent,
+    LotusAcademyEditComponent,
+    LotusAcademyPaymentComponent,
     LogoutComponent
   ],
   imports: [

@@ -29,7 +29,7 @@ export class LotusAcademyHomeComponent implements OnInit {
     if (sessionStorage.getItem('role') == null) {
       this.router.navigate(['/login']);
     }
-    this.displayedColumns = ["id", "date", "type", "name","phone", "emailAddress", "amount"];
+    this.displayedColumns = ["id", "date", "name","phone", "emailAddress", "amount", "status"];
   }
   filterChange(data: Event) {
     const value = (data.target as HTMLInputElement).value;

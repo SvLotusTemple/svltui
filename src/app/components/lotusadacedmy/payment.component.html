@@ -1,61 +1,78 @@
-<h4>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></h4>
-<mat-card>
-    <h1 class="text-danger">&nbsp;Vastram Sale</h1>
-    <h4 class="text-danger" *ngIf="this.errorMsg != null">{{ errorMsg }}</h4>
-    <mat-card-content class="my-card-content">
-        <mat-form-field appearance="outline">
-            <mat-label>Amount</mat-label>
-            <input matInput type="text" class="form-control" [(ngModel)]="amount" name="amount"/>
-        </mat-form-field>                
-    </mat-card-content>
-    <mat-card-content class="my-card-content">
-        <mat-form-field appearance="outline">
-            <mat-label labelPosition="before">Phone</mat-label>
-            <input matInput type="text" class="form-control" [(ngModel)]="phone" name="phone"/>
-        </mat-form-field>           
-    </mat-card-content>
-    <mat-card-content class="my-card-content">
-        <mat-form-field appearance="outline">
-            <mat-label labelPosition="before">Email</mat-label>
-            <input matInput type="text" class="form-control" [(ngModel)]="emailAddress" name="emailAddress"/>
-        </mat-form-field>         
-    </mat-card-content>
-    <form (ngSubmit)="onSave()">
-        <div *ngIf="requestId > 0; else roleTemplate">
-            <mat-card-content class="my-card-content">
-            <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button *ngIf="role == 'ADMIN' && cancelButton" type="button" class="btn btn-warning" (click)="openDialog(myDialog, 1)">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button *ngIf="role == 'ADMIN' && emailButton" type="button" class="btn btn-info" (click)="openDialog(myDialog, 2)"> Send Email</button>
-        </mat-card-content>
-        </div>
-        <ng-template #roleTemplate>
-            <button type="submit" class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-        </ng-template>
-    </form>
-</mat-card>
-
-<!-- The Modal -->
-<ng-template #myDialog>
-    <h2 matDialogTitle>{{modalTitle}}</h2>
-    <h4 *ngIf="this.errorMsg">
-        <div class="alert-warning">{{errorMsg}}</div>
-    </h4>    
-    <mat-dialog-content>
-      <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <td><label  class="col-form-label">Message:&nbsp;</label></td>
-            </tr>
+<div class="row">
+    <div class="col-md-5"  *ngIf="!this.successMsg">
+       <form name="mycc" novalidate>
+        <table class="table table-borderless">
           <tr>
-            <td>&nbsp;<textarea rows="5" class="form-control" [(ngModel)]="modalMessage"></textarea>
+            <td colspan="2">
+              <h1><font color=#6D1907>Credit details</font></h1>
             </td>
           </tr>
-        </tbody>
-      </table>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button matDialogClose class="btn btn-danger">Close</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-success" (click)="onModalSubmit()">Submit</button>
-    </mat-dialog-actions>
-  </ng-template>
+          <tr *ngIf="this.errorMsg">
+            <td colspan="2">
+              <h4 class="text-danger">{{errorMsg}}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="text-info"><b>Name:&nbsp;</b></td>
+            <td class="text-info">&nbsp;{{lastName}}&nbsp;,{{firstName}}
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="text-info"><b>Email:&nbsp;</b></td>
+            <td class="text-info">&nbsp;{{emailAddress}}&nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="text-info"><b>Amount:&nbsp;</b>
+            </td>
+            <td class="text-info">&nbsp;&nbsp;${{amount| number:'1.2-2'}}
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="text-info"><b>Message:&nbsp;</b>
+            </td>
+            <td class="text-info"><div innerHTML = "{{ message }}"></div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="text-info"><b>Card Number:&nbsp;</b></td>
+            <td class="text-info">
+              <input type="text" size="20" id='cardNumber' name='cardNumber' [(ngModel)]="cardNumber" placeholder="enter card number">&nbsp;<font color=red>*</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="text-info"><b>Name:&nbsp;</b></td>
+            <td class="text-info">
+              <input type="text" size="30" id='cardName' name='cardName' [(ngModel)]="cardName" placeholder="enter item name" required>&nbsp;
+              <font color=red>*</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="text-info"><b>Expiration:&nbsp;</b></td>
+            <td class="text-info">
+              <input type="text" size="4" id='expiration' name='expiration' [(ngModel)]="expiration" placeholder="MMYY"
+                required>&nbsp;(MMYY)&nbsp;<font color=red>*</font>
+            </td>
+          </tr>
+         <tr>
+            <td align="right" class="text-info">&nbsp;
+            </td>
+            <td><button type="submit" class="btn btn-success"  (click)="onSave()">Submit</button>
+            </td>
+          </tr>
+        </table>
+        </form>
+    </div>
+    <div class="col-md-5"  *ngIf="successMsg">
+        <table class="table table-borderless">
+          <tr>
+            <td>
+              <h3 class="text-danger">Order confimation</h3>
+            </td>
+          </tr>  
+            <tr>
+              <td><h4 class="text-info">Your Order Has Been Confirmed, Thank You!.<br><br>Please check your email for pickup location.</h4></td>
+            </tr>
+        </table>
+    </div>
+  </div>

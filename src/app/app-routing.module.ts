@@ -31,6 +31,9 @@ import { RegistrationSuccessComponent } from './components/customer/registration
 import { GuestRequestSuccessComponent } from './components/customer/guestRequestSuccess.component';
 import { VastramHomeComponent } from './components/vastram/vastram.component';
 import { LotusAcademyHomeComponent } from './components/lotusadacedmy/home.component';
+import { LotusAcademyEditComponent } from './components/lotusadacedmy/edit.component';
+import { LotusAcademyPaymentComponent } from './components/lotusadacedmy/payment.component';
+
 const appRoutes: Routes = [
 
   { path: 'customer/login', component: CustomerLoginComponent },
@@ -60,6 +63,8 @@ const appRoutes: Routes = [
   { path: 'reference/facilities/serviceytpe', component: ReferenceServiceTypeComponent}, 
   { path: 'vastram/home', component: VastramHomeComponent },
   { path: 'lotusacademy/home', component: LotusAcademyHomeComponent },
+  { path: 'lotusacademy/edit/:id', component: LotusAcademyEditComponent },
+  { path: 'payment/key/:key', component: LotusAcademyPaymentComponent },
   { path: 'module', component: ModuleComponent},
   { path: 'setup', component: SetupComponent},
   { path: 'home', component: HomeComponent},

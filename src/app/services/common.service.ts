@@ -8,8 +8,8 @@ import { UpdatePassword } from '../models/user';
 import { PujaModel, RefModel} from '../models/reference';
 import { User } from '../models/user';
 import { UploadFileRequest } from '../models/upload';
-import { EventRequest, RequestSummary } from '../models/request';
-import { Acknowledge, Customer, PaymentReport, PaymentSummaryRequest } from '../models/common';
+import { EventRequest, GeneralRequest, RequestSummary } from '../models/request';
+import { Acknowledge, Customer, EmailRequest, Payment, PaymentReport, PaymentSummaryRequest } from '../models/common';
 
 @Injectable()
 export class CommonService {
@@ -94,6 +94,13 @@ export class CommonService {
         }
         return this.http.post(this.url + 'request/save', request);
     }
+    getGeneralRequest(requestId: number): Observable<GeneralRequest> {
+        //       console.log(' getgeneralRequest '+requestId);
+        return this.http.get<GeneralRequest>(this.url + 'request/general/findId/' + requestId);
+    }
+    saveGeneralRequest(request: GeneralRequest): Observable<GeneralRequest> {
+        return this.http.post(this.url + 'request/general/save', request);
+    }
 
     getAcknowledge(acknowledge: Acknowledge): Observable<Boolean> {
        return this.http.post<Boolean>(this.url + 'priest/acknowledge', acknowledge);
@@ -110,8 +117,21 @@ export class CommonService {
         return this.http.get<EventRequest[]>(this.url + 'request/history');
     }
     // payment
+    getPaymentlink(key: String): Observable<GeneralRequest> {
+        return this.http.get<GeneralRequest>(this.url + 'payment/paymentlink/' + key);
+    }
     getPaymentSummary(request: PaymentSummaryRequest): Observable<PaymentReport[]> {
         return this.http.post<PaymentReport[]>(this.url + 'report/general/summary', request);
+    }
+    sendPaymentLink(payment: Payment) {
+        return this.http.post(this.url + 'payment/sendPaymentLink', payment);
+    }
+    saveCreditcard(payment: Payment): Observable<Boolean> {
+        return this.http.post<Boolean>(this.url + 'payment/save/credit', payment);
+    }
+    //email
+    sendEmail(request: EmailRequest) {
+        return this.http.post(this.url + 'api/sendemail', request);
     }
 
 }
