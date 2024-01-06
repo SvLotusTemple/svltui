@@ -62,6 +62,6 @@ export class GeneralRequest {
     lastName?: string;	
     phone?:	string;
     emailAddress?: string;	
-    paymentReport?: Array<PaymentReport> = [];
+    payments?: Array<PaymentReport> = [];
 }
 

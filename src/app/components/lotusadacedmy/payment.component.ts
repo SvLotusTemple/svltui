@@ -28,9 +28,6 @@ export class LotusAcademyPaymentComponent implements OnInit {
   successMsg: string;
   constructor(private router: Router, private route: ActivatedRoute, private commonSrv: CommonService) {
     console.log('LotusAcademyPaymentComponent: constructor');
-  }
-
-  ngOnInit(): void {
     const selectedId = this.route.snapshot.paramMap.get('key');
     if (selectedId !== '0') {
       this.commonSrv.getPaymentlink(selectedId).subscribe((resp: GeneralRequest) => {
@@ -42,11 +39,16 @@ export class LotusAcademyPaymentComponent implements OnInit {
         this.phone = resp.phone; 
         this.amount = resp.amount;
         this.message = resp.comments; 
+        if (resp.payments != null && resp.payments[0].amount == this.amount) {
+          this.successMsg = 'The payment has already been made, Thank You!.';
+        }
       },
         error => console.log('Error :: ' + error)
       );
     }
+  }
 
+  ngOnInit(): void {
   }
   convertDate(number: Date) {
     return CommonUtils.convertDate(number);
@@ -77,7 +79,7 @@ export class LotusAcademyPaymentComponent implements OnInit {
 
     this.commonSrv.saveCreditcard(payment)
       .subscribe((resp: boolean) => {
-        this.successMsg = 'Saved payment ';
+        this.successMsg = 'Your payment has been confirmed, Thank You!.';
       },
         error => {
           if (error != null && error.error != null && error.error.message != null) {

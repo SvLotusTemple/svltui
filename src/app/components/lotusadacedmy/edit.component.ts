@@ -50,8 +50,8 @@ export class LotusAcademyEditComponent implements OnInit {
         this.comments = resp.comments; 
         this.emailButton = true;
         this.cancelButton = true;
-        if (resp.paymentReport != null) {
-          this.request.paymentReport = resp.paymentReport;
+        if (resp.payments != null) {
+          this.request.payments = resp.payments;
         }
 
       },
@@ -63,7 +63,7 @@ export class LotusAcademyEditComponent implements OnInit {
       this.amount = 0;
       this.moduleId = this.moduleId;
       this.request.amount = 0;
-      this.request.paymentReport = [];
+      this.request.payments = [];
       this.request.moduleId = this.moduleId;
       this.emailButton = false;
       this.cancelButton = false;

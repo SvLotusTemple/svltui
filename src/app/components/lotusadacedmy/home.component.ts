@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { CommonService } from 'src/app/services/common.service';
-import { EventRequest, RequestSummary } from 'src/app/models/request';
-import { Payment, PaymentReport, PaymentSummaryRequest, Puja } from 'src/app/models/common';
+import { EventRequest, GeneralRequest } from 'src/app/models/request';
+import { Payment, PaymentSummaryRequest } from 'src/app/models/common';
 @Component({
   selector: 'app-lotusacademy-home',
   templateUrl: './home.component.html',
@@ -15,7 +15,7 @@ import { Payment, PaymentReport, PaymentSummaryRequest, Puja } from 'src/app/mod
 export class LotusAcademyHomeComponent implements OnInit {
 
   moduleId?: number;
-  summaryReport!: PaymentReport[];
+  summaryReport!: GeneralRequest[];
   amount?: string;
   phone?: string;
   emailAddress?: string;
@@ -54,7 +54,7 @@ export class LotusAcademyHomeComponent implements OnInit {
     this.getSummary();
   }
   getSummary(): void {
-    this.commonSrv.getPaymentSummary(this.paymentRequest!).subscribe((resp: PaymentReport[]) => {
+    this.commonSrv.getPaymentSummary(this.paymentRequest!).subscribe((resp: GeneralRequest[]) => {
       this.summaryReport = resp;
       if (resp != null) {
         this.dataSource = new MatTableDataSource<EventRequest>(this.summaryReport);
@@ -70,5 +70,15 @@ export class LotusAcademyHomeComponent implements OnInit {
   }
   getMonthDate(date: Date) {
     return CommonUtils.convertMonDay(date);
+  }
+  getPaymentStatus(selectedId: number) {
+    
+    let val = this.summaryReport.filter(x => x.id == selectedId)[0].payments;
+
+    if (val != null) {
+      return 'Paid';
+    } else {
+      return 'Pending';
+    }
   }
 }

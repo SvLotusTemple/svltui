@@ -118,16 +118,16 @@ export class CommonService {
     }
     // payment
     getPaymentlink(key: String): Observable<GeneralRequest> {
-        return this.http.get<GeneralRequest>(this.url + 'payment/paymentlink/' + key);
+        return this.http.get<GeneralRequest>(this.url + 'api/payment/link/' + key);
     }
-    getPaymentSummary(request: PaymentSummaryRequest): Observable<PaymentReport[]> {
-        return this.http.post<PaymentReport[]>(this.url + 'report/general/summary', request);
+    getPaymentSummary(request: PaymentSummaryRequest): Observable<GeneralRequest[]> {
+        return this.http.post<GeneralRequest[]>(this.url + 'report/general/summary', request);
     }
     sendPaymentLink(payment: Payment) {
         return this.http.post(this.url + 'payment/sendPaymentLink', payment);
     }
     saveCreditcard(payment: Payment): Observable<Boolean> {
-        return this.http.post<Boolean>(this.url + 'payment/save/credit', payment);
+        return this.http.post<Boolean>(this.url + 'api/payment/credit', payment);
     }
     //email
     sendEmail(request: EmailRequest) {

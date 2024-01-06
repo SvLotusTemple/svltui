@@ -19,11 +19,16 @@ export class NavbarComponent implements OnInit {
     path!: string;
     constructor(private router: Router,private dataSharingService: DataSharingService, private cdref: ChangeDetectorRef, private route: ActivatedRoute) { }
     ngOnInit(): void {
-        console.log("NavbarComponent ngOnInit "+this.isMenubar+ " route: "+this.route);
         this.moduleId = Number(sessionStorage.getItem('moduleId')!) ;
         this.role = sessionStorage.getItem('role')! ;
+        
         if (sessionStorage.getItem('role') == null || this.moduleId == null) {
-            this.router.navigate(['/login']);
+            let val = window.location.href;
+            console.log('Path: '+val);
+            if (val.indexOf('/key/') < 0 || val.indexOf('/verify/') < 0) {
+                console.log(' inside Path: '+val.indexOf('/key/'));
+//                this.router.navigate(['/login']);
+            }
         }
         // no change detection instead of refresh page
         this.dataSharingService.isMenubar.subscribe(value => {
