@@ -1,7 +1,8 @@
-<div class="row">
+
+<div align="center" class="custom-form">
     <div class="col-md-5"  *ngIf="!this.successMsg">
        <form name="mycc" novalidate>
-        <table class="table table-borderless">
+        <table class="borderless-table ">
           <tr>
             <td colspan="2">
               <h1><font color=#6D1907>Credit details</font></h1>
@@ -13,42 +14,42 @@
             </td>
           </tr>
           <tr>
-            <td align="right" class="text-info"><b>Name:&nbsp;</b></td>
-            <td class="text-info">&nbsp;{{lastName}}&nbsp;,{{firstName}}
+            <td align="right" ><b>Name:&nbsp;</b></td>
+            <td class="text-info" align="left">&nbsp;{{lastName}}&nbsp;,{{firstName}}
             </td>
           </tr>
           <tr>
-            <td align="right" class="text-info"><b>Email:&nbsp;</b></td>
+            <td align="right" ><b>Email:&nbsp;</b></td>
             <td class="text-info">&nbsp;{{emailAddress}}&nbsp;
             </td>
           </tr>
           <tr>
-            <td align="right" class="text-info"><b>Amount:&nbsp;</b>
+            <td align="right" ><b>Amount:&nbsp;</b>
             </td>
             <td class="text-info">&nbsp;&nbsp;${{amount| number:'1.2-2'}}
             </td>
           </tr>
           <tr>
-            <td align="right" class="text-info"><b>Message:&nbsp;</b>
+            <td align="right" ><b>Message:&nbsp;</b>
             </td>
             <td class="text-info"><div innerHTML = "{{ message }}"></div>
             </td>
           </tr>
           <tr>
-            <td align="right" class="text-info"><b>Card Number:&nbsp;</b></td>
+            <td align="right" ><b>Card Number:&nbsp;</b></td>
             <td class="text-info">
               <input type="text" size="20" id='cardNumber' name='cardNumber' [(ngModel)]="cardNumber" placeholder="enter card number">&nbsp;<font color=red>*</font>
             </td>
           </tr>
           <tr>
-            <td align="right" class="text-info"><b>Name:&nbsp;</b></td>
+            <td align="right" ><b>Card Holder Name:&nbsp;</b></td>
             <td class="text-info">
               <input type="text" size="30" id='cardName' name='cardName' [(ngModel)]="cardName" placeholder="enter item name" required>&nbsp;
               <font color=red>*</font>
             </td>
           </tr>
           <tr>
-            <td align="right" class="text-info"><b>Expiration:&nbsp;</b></td>
+            <td align="right" ><b>Expiration:&nbsp;</b></td>
             <td class="text-info">
               <input type="text" size="4" id='expiration' name='expiration' [(ngModel)]="expiration" placeholder="MMYY"
                 required>&nbsp;(MMYY)&nbsp;<font color=red>*</font>

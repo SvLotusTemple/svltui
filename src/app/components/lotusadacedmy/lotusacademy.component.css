@@ -7,6 +7,25 @@ button{
   margin: 2px;
 }
 
+.borderless-table {
+  border: none;
+  border-color: white;
+  line-height: 1.5;
+}
+.custom-form {
+  margin-top: 30px; 
+}
+.custom-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+td{
+  color: black;
+  white-space: nowrap;
+  text-align: left;
+}
+
 th{
   background-color: #fddf48 !important;
   color: rgb(129, 24, 24);
